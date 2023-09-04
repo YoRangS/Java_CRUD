@@ -1,0 +1,6 @@
+3|superintendent|관리자, 감독관
+1|electric|전기의, 전기를 생산하는
+2|equipment|장비, 용품
+1|pole|기둥, 장대
+1|formerly|이전에, 예전에
+1|transfer|옮기다, 이동하다
