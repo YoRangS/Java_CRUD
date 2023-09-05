@@ -40,6 +40,12 @@ public class WordManager {
 		
 		return s.nextInt();
 	}
+	public void goSelectMenu() {
+		s.nextLine();
+		System.out.print("계속하려면 엔터를 누르세요.");
+		s.nextLine();
+		System.out.println();
+	}
 	public void start() {
 		wordCRUD.loadFile();
 
@@ -67,6 +73,8 @@ public class WordManager {
 			else if(menu == 7) {
 				wordCRUD.saveFile();
 			}
+
+			goSelectMenu();
 		}
 	}
 }
