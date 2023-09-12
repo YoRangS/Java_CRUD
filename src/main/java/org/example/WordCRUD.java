@@ -1,13 +1,20 @@
 package org.example;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WordCRUD implements ICRUD{
+
+	final String selectall = "select * from Dictionary";
 	ArrayList<Word> list;
 	Scanner s;
 	final String fname = "Dictionary.txt";
+	Connection conn;
 	/*
 	 * => 난이도(1,2,3) & 새 단어 입력 : 1 driveway
 	 * 뜻 입력 : 차고 진입로
@@ -17,6 +24,27 @@ public class WordCRUD implements ICRUD{
 	WordCRUD(Scanner s) {
 		list = new ArrayList<>();
 		this.s = s;
+		conn = DBConnection.getConnection();
+	}
+
+	public void loadData() {
+		list.clear();
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(selectall);
+			while(true) {
+				if(!rs.next()) break;
+				int id = rs.getInt("id");
+				int level = rs.getInt("level");
+				String word = rs.getString("word");
+				String meaning = rs.getString("meaning");
+				list.add(new Word(id, level, word, meaning));
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	@Override
@@ -56,6 +84,7 @@ public class WordCRUD implements ICRUD{
 	}
 
 	public void listAll() {
+		loadData();
 		System.out.println("---------------------------");
 		for(int i = 0; i < list.size(); i++) {
 			System.out.print((i+1) + " ");
@@ -143,29 +172,29 @@ public class WordCRUD implements ICRUD{
 		}
 	}
 
-	public void loadFile() {
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(fname));
-			String line;
-			int count = 0;
-
-			while(true) {
-				line = br.readLine();
-				if(line == null) break;
-				String[] data = line.split("\\|");
-				int level = Integer.parseInt(data[0]);
-				String word = data[1];
-				String meaning = data[2];
-				list.add(new Word(count, level, word, meaning));
-				count++;
-			}
-			br.close();
-			System.out.println("==> " + count + "개 로딩 완료!!!");
-		} catch (IOException e){
-			e.printStackTrace();
-		}
-
-	}
+//	public void loadFile() {
+//		try {
+//			BufferedReader br = new BufferedReader(new FileReader(fname));
+//			String line;
+//			int count = 0;
+//
+//			while(true) {
+//				line = br.readLine();
+//				if(line == null) break;
+//				String[] data = line.split("\\|");
+//				int level = Integer.parseInt(data[0]);
+//				String word = data[1];
+//				String meaning = data[2];
+//				list.add(new Word(count, level, word, meaning));
+//				count++;
+//			}
+//			br.close();
+//			System.out.println("==> " + count + "개 로딩 완료!!!");
+//		} catch (IOException e){
+//			e.printStackTrace();
+//		}
+//
+//	}
 	public void saveFile() {
 		try {
 			PrintWriter pr = new PrintWriter(new FileWriter(fname));

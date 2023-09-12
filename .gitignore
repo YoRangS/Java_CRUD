@@ -4,10 +4,10 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+../WordMasterDBProject/.idea/.idea/modules.xml
+../WordMasterDBProject/.idea/.idea/jarRepositories.xml
+../WordMasterDBProject/.idea/.idea/compiler.xml
+../WordMasterDBProject/.idea/.idea/libraries/
 *.iws
 *.iml
 *.ipr

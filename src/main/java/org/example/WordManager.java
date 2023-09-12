@@ -47,7 +47,7 @@ public class WordManager {
 		System.out.println();
 	}
 	public void start() {
-		wordCRUD.loadFile();
+//		wordCRUD.loadFile();
 
 		while(true) {
 			int menu = selectMenu();
