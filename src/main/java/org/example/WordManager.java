@@ -23,6 +23,32 @@ public class WordManager {
 	WordManager(){
 		wordCRUD = new WordCRUD(s);
 	}
+
+	public void loadManager() {
+		while(true) {
+			int loadMethod = selectLoad();
+			if(loadMethod == 1) {
+				wordCRUD.loadFile();
+				break;
+			}
+			else if(loadMethod == 2) {
+				wordCRUD.loadData();
+				break;
+			}
+			else {
+				System.out.println("1과 2중에 선택하십시오.");
+			}
+		}
+	}
+	public int selectLoad() {
+		System.out.print("*** 파일 로드 방법을 선택하세요 ***\n"
+						+ " ******************************\n"
+						+ " 1. txt 파일\n"
+						+ " 2. DB\n"
+						+ " ******************************\n"
+						+ " => 원하는 메뉴는? ");
+		return s.nextInt();
+	}
 	
 	public int selectMenu() {
 		System.out.print("*** 영단어 마스터 ***\n"
@@ -34,6 +60,7 @@ public class WordManager {
 				+ "	5. 단어 수정\n"
 				+ "	6. 단어 삭제\n"
 				+ "	7. 파일 저장\n"
+				+ "    8. 파일 로드\n"
 				+ "	0. 나가기\n"
 				+ "	*******************\n"
 				+ "	=> 원하는 메뉴는? ");
@@ -47,7 +74,8 @@ public class WordManager {
 		System.out.println();
 	}
 	public void start() {
-//		wordCRUD.loadFile();
+
+		loadManager();
 
 		while(true) {
 			int menu = selectMenu();
@@ -72,6 +100,9 @@ public class WordManager {
 			}
 			else if(menu == 7) {
 				wordCRUD.saveFile();
+			}
+			else if(menu == 8) {
+				loadManager();
 			}
 
 			goSelectMenu();

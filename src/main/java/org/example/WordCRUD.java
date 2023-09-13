@@ -32,6 +32,7 @@ public class WordCRUD implements ICRUD{
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(selectall);
+			int count = 0;
 			while(true) {
 				if(!rs.next()) break;
 				int id = rs.getInt("id");
@@ -39,9 +40,11 @@ public class WordCRUD implements ICRUD{
 				String word = rs.getString("word");
 				String meaning = rs.getString("meaning");
 				list.add(new Word(id, level, word, meaning));
+				count++;
 			}
 			rs.close();
 			stmt.close();
+			System.out.println("==> " + count + "개 로딩 완료!!!");
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -84,7 +87,6 @@ public class WordCRUD implements ICRUD{
 	}
 
 	public void listAll() {
-		loadData();
 		System.out.println("---------------------------");
 		for(int i = 0; i < list.size(); i++) {
 			System.out.print((i+1) + " ");
@@ -172,29 +174,29 @@ public class WordCRUD implements ICRUD{
 		}
 	}
 
-//	public void loadFile() {
-//		try {
-//			BufferedReader br = new BufferedReader(new FileReader(fname));
-//			String line;
-//			int count = 0;
-//
-//			while(true) {
-//				line = br.readLine();
-//				if(line == null) break;
-//				String[] data = line.split("\\|");
-//				int level = Integer.parseInt(data[0]);
-//				String word = data[1];
-//				String meaning = data[2];
-//				list.add(new Word(count, level, word, meaning));
-//				count++;
-//			}
-//			br.close();
-//			System.out.println("==> " + count + "개 로딩 완료!!!");
-//		} catch (IOException e){
-//			e.printStackTrace();
-//		}
-//
-//	}
+	public void loadFile() {
+		list.clear();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(fname));
+			String line;
+			int count = 0;
+
+			while(true) {
+				line = br.readLine();
+				if(line == null) break;
+				String[] data = line.split("\\|");
+				int level = Integer.parseInt(data[0]);
+				String word = data[1];
+				String meaning = data[2];
+				list.add(new Word(count, level, word, meaning));
+				count++;
+			}
+			br.close();
+			System.out.println("==> " + count + "개 로딩 완료!!!");
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+	}
 	public void saveFile() {
 		try {
 			PrintWriter pr = new PrintWriter(new FileWriter(fname));
