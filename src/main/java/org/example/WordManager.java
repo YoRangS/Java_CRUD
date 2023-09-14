@@ -32,7 +32,7 @@ public class WordManager {
 				break;
 			}
 			else if(loadMethod == 2) {
-				wordCRUD.loadData();
+				wordCRUD.loadData("");
 				break;
 			}
 			else {
@@ -84,7 +84,7 @@ public class WordManager {
 				wordCRUD.addItem();
 			}
 			else if(menu == 1) {
-				wordCRUD.listAll();
+				wordCRUD.listAll("");
 			}
 			else if(menu == 2) {
 				wordCRUD.searchLevel();

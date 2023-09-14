@@ -1,8 +1,9 @@
 package org.example;
 
+import java.sql.SQLException;
+
 public interface ICRUD {
-	public Object add();
-	public int update(Object obj);
-	public int delete(Object obj);
-	public void selectOne(int id);
+	public int add(Word one) throws SQLException;
+	public int update(Word one);
+	public int delete(Word one);
 }
