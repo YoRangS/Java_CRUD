@@ -3,7 +3,6 @@
 2|equipment|장비, 용품
 1|pole|기둥, 장대
 1|formerly|이전에, 예전에
-1|transfer|옮기다, 이동하다
 2|executive|경영 간부, 임원
 1|assure|안심시키다, 확신시키다
 2|embarrassment|당황, 난처함
@@ -31,3 +30,5 @@
 1|scatter|흩뿌리다, 살포하다
 1|proceed|진행하다[되다]
 1|reputation|평판, 명성
+1| apple|사과
+3| filesave|파일저장

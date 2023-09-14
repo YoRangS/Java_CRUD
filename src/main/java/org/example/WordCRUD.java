@@ -135,6 +135,8 @@ public class WordCRUD implements ICRUD{
 
 		if(retval > 0) System.out.println("새 단어가 단어장에 추가되었습니다.");
 		else System.out.println("새 단어 추가중 에러가 발생되었습니다.");
+
+		loadData("");
 	}
 
 	public void listAll(String keyword) {
@@ -191,6 +193,8 @@ public class WordCRUD implements ICRUD{
 		int val = update(new Word(list.get(id-1).getId(), 0, "", meaning));
 		if(val > 0) System.out.println("단어가 수정되었습니다.");
 		else System.out.println("[수정] 에러발생 !!!");
+
+		loadData("");
 	}
 
 	public void deleteItem() {
@@ -211,6 +215,8 @@ public class WordCRUD implements ICRUD{
 		} else {
 			System.out.println("취소되었습니다. ");
 		}
+
+		loadData("");
 	}
 
 	public void loadFile() {
